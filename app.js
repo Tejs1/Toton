@@ -8,19 +8,20 @@ async function curatedphoto() {
     "https://api.pexels.com/v1/curated?per_page=1",
     {
       method: "GET",
-      Headers: {
+      headers: {
         Accept: "application/json",
         Authorization: auth,
       },
     }
   );
   const data = await datafetch.json();
-  console.log(data);
-  //   data.photos.forEach((photo) => {
-  //     console.log(photos);
-  //     const galleryImg = document.childElement("div");
-  //     galleryImg.classList.add("gallery-img");
-  //     galleryImg.innerHTML = `<img src=${photo}></img>`;
-  //   });
+
+  data.photos.forEach((photo) => {
+    const galleryImg = document.createElement("div");
+    galleryImg.classList.add("gallery-img");
+    galleryImg.innerHTML = `<img src=${photo.src.large}></img>
+    <p>${photo.photographe}</p>`;
+    gallery.appendChild(galleryImg);
+  });
 }
 curatedphoto();
